@@ -8,7 +8,11 @@ const app = express();
 
 app.use(express.json({type:'*/*'}))
 
-app.use(cors());
+app.use(cors({
+    origin:'*',
+    methods: ['GET', 'POST', 'PATH', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(router);
 
 const listen = process.env.PORT ?? 5000;

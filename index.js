@@ -10,7 +10,7 @@ app.use(express.json({type:'*/*'}))
 
 app.use(cors({
     origin:'*',
-    methods: ['GET', 'POST', 'PATH', 'PUT', 'DELETE'],
+    methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(router);

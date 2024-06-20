@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json({type:'*/*'}))
 
 app.use(cors({
-    origin:'*',
+    origin:'https://hectormorgadoc.github.io/ReporteFlorambraC/',
     methods: ['GET', 'POST', 'PATCH', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));

@@ -17,7 +17,7 @@ app.use(cors({
 
 app.use(router);
 
-const listen = process.env.PORT ?? 5000;
+const listen = process.env.PORT ?? 8080;
 
 app.listen(listen, () => {
     console.log( `SERVER RUNNING PORT ${listen}` )

@@ -1,4 +1,4 @@
-import { MysqlModel } from "../Model/modelMysql.js";
+import { MysqlModel } from "../Model/modelMysqlLocal.js";
 import { json } from "express";
 
 export class MyController {

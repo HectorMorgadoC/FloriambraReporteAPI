@@ -1,57 +1,22 @@
-import { MysqlModel } from "../Model/modelMysqlLocal.js";
+import { MysqlModel } from "../Model/modelMysql.js";
 import { json } from "express";
 
 export class MyController {
 
-    static async getAll(request,response){
-
+    static async getAll(request,response) {
         try {
-            const result = JSON.stringify(await MysqlModel.getAll());
+            const result = await MysqlModel.getAll();
             response.json(result);
         } catch (error) {
             response.json({error:error});
-        }
-        
-        
+        }       
     }
-
-    static async getReports(request,response){
-
-        try {
-            const result = JSON.stringify(await MysqlModel.getReports());
-            response.json(result);
-        } catch (error) {
-            response.json({error:error});
-        }
-        
-    }
-
-    static async getMachine(request,response){
-        try {
-            const result = JSON.stringify(await MysqlModel.getMachine());
-            response.json(result);
-        } catch (error) {
-            response.json({error:error});
-        }
-        
-    }
-    
-    static async getOrder(request,response){
-        try {
-            const result = JSON.stringify(await MysqlModel.getOrder());
-            response.json(result);
-        } catch (error) {
-            response.json({error:error})
-        }
-        
-    }
-
 
     static async getReportsList(request,response){
         try {
             const nombre = request.params.name;
             const reportList = await MysqlModel.getReportsList(nombre);
-            response.json(JSON.stringify(reportList))
+            response.json(reportList)
         } catch (error) {
             response.json({error:error})
         }
@@ -62,24 +27,23 @@ export class MyController {
         try {
             const nombre = request.params.description;
             const machineList = await MysqlModel.getMachineList(nombre);
-            response.json(JSON.stringify(machineList))
+            response.json(machineList)
         } catch (error) {
             response.json({error:error})
         }
     }
         
-
     static async getOrderList(request,response){
         try {
             const numberOrder = Number(request.params.number);
+            console.log( numberOrder )
             const orderList = await MysqlModel.getOrderList(numberOrder);
-            response.json(JSON.stringify(orderList));
+            response.json(orderList);
         } catch (error) {
             response.json({error:error})
         }
         
     }
-
 
     static async createReport(request,response) {
         try {

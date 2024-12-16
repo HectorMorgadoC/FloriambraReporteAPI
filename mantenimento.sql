@@ -1,59 +1,65 @@
 -- Crear la base de datos
-CREATE DATABASE mantenimiento;
+CREATE DATABASE maintenance;
 -- Usar la base de datos
-USE mantenimiento;
+USE maintenance;
 -- Crear las tablas
 -- descripcion_maquinas
-CREATE TABLE descripcion_maquina(
+CREATE TABLE machine_description(
     id CHAR(36) NOT NULL DEFAULT (UUID()) PRIMARY KEY UNIQUE,
-    descripcion VARCHAR(50)
+    description VARCHAR(50)
 );
 
-CREATE TABLE rutina_trabajo(
+CREATE TABLE work_routine(
     id CHAR(36) NOT NULL DEFAULT (UUID()) PRIMARY KEY UNIQUE,
-    descripcion VARCHAR(50)
+    description VARCHAR(50)
 );
 
-CREATE TABLE reportero(
+CREATE TABLE reporter(
     id CHAR(36) NOT NULL DEFAULT (UUID()) PRIMARY KEY UNIQUE,
-    nombre VARCHAR(50)
+    name VARCHAR(50)
 );
 
-CREATE TABLE asignado(
+CREATE TABLE assigned(
     id CHAR(36) NOT NULL DEFAULT (UUID()) PRIMARY KEY UNIQUE,
-    nombre VARCHAR(50)
+    name VARCHAR(50)
 );
 
-CREATE TABLE reporte(
+CREATE TABLE report(
     id CHAR(36) NOT NULL DEFAULT (UUID()) PRIMARY KEY,
-    numero_orden INT NOT NULL AUTO_INCREMENT UNIQUE,
-    id_descripcion_maquina CHAR(36) NOT NULL,
-    id_rutina_trabajo CHAR(36) NOT NULL,
-    id_reportero CHAR(36) NOT NULL,
-    id_asignado CHAR(36) NOT NULL,
-    fecha_aviso DATE,
-    fecha_ejecucion DATE,
-    reporte_falla VARCHAR(255),
-    trabajo_efectuar VARCHAR(255),
-    comentarios VARCHAR(255),
-    FOREIGN KEY(id_descripcion_maquina) REFERENCES descripcion_maquina(id),
-    FOREIGN KEY(id_rutina_trabajo) REFERENCES rutina_trabajo(id),
-    FOREIGN KEY(id_reportero) REFERENCES reportero(id),
-    FOREIGN KEY(id_asignado) REFERENCES asignado(id)
+    order_number INT NOT NULL AUTO_INCREMENT UNIQUE,
+    id_machine_description CHAR(36) NOT NULL,
+    id_work_routine CHAR(36) NOT NULL,
+    id_reporter CHAR(36) NOT NULL,
+    id_assigned CHAR(36) NOT NULL,
+    notice_date DATETIME NOT NULL,
+    date_of_execution DATETIME NOT NULL,
+    report_failure VARCHAR(255) NOT NULL,
+    work_done VARCHAR(255) NOT NULL,
+    comments VARCHAR(255),
+    FOREIGN KEY(id_machine_description) REFERENCES machine_description(id),
+    FOREIGN KEY(id_work_routine) REFERENCES work_routine(id),
+    FOREIGN KEY(id_reporter) REFERENCES reporter(id),
+    FOREIGN KEY(id_assigned) REFERENCES assigned(id)
 );
 
-ALTER TABLE reporte AUTO_INCREMENT = 100;
+CREATE TABLE user_description(
+    id CHAR(36) NOT NULL DEFAULT (UUID()) PRIMARY KEY UNIQUE,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password_hash CHAR(60) NOT NULL 
+);
+
+ALTER TABLE report AUTO_INCREMENT = 100;
 
 -- Para ingresar datos en descripcion_maquina
-INSERT INTO descripcion_maquina( descripcion ) VALUE ("Aglomeradora");
+INSERT INTO machine_description( description ) VALUE ("Aglomeradora");
 -- Para ingresar datos en rutina_trabajo
-INSERT INTO rutina_trabajo( descripcion ) VALUE ("Mantenimiento preventivo");
+INSERT INTO work_routine( description ) VALUE ("Mantenimiento preventivo");
 -- Para ingresar datos en reportero
-INSERT INTO reportero( nombre ) VALUE (" henry IMPRESOR ");
+INSERT INTO reporter( name ) VALUE (" henry IMPRESOR ");
 -- Para ingresar datos en asignado
-INSERT INTO asignado( nombre ) VALUE ( "Hector ELECTRICISTA" );
+INSERT INTO assigned( name ) VALUE ( "Hector ELECTRICISTA" );
 
-INSERT INTO reporte( id_descripcion_maquina,id_rutina_trabajo,id_reportero,id_asignado,fecha_aviso,fecha_ejecucion,reporte_falla,trabajo_efectuar,comentarios)
+INSERT INTO report( id_machine_description,id_work_routine,id_reporter,id_asigned,notice_date,date_of_execution,report_failure,work_done,comments)
 VALUES ("07424478-e7b5-11ee-a395-24fd527c6f15","e2981afc-e7b8-11ee-a395-24fd527c6f15",
         "87a6c02b-e7b9-11ee-a395-24fd527c6f15","3617c93e-e7ba-11ee-a395-24fd527c6f15",
         "2022-06-02","2022-06-02","falla de velocidad principal",

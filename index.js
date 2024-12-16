@@ -1,4 +1,3 @@
-import { json } from "express";
 import express,{ json as _json } from "express";
 import { router } from "./Router/routers.js";
 import  cors  from "cors";

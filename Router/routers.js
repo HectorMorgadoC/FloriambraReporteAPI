@@ -3,7 +3,13 @@ import { MyController } from "../Controller/controller.js";
 
 export const router = Router();
 
-    router.get('/',MyController.getAll);
+    // router.get('/',MyController.getConnection);
+
+    // router.get('/login',Mycontroller.getLogin);
+
+    router.get('/report',MyController.getAll);
+
+    router.post('/report',MyController.createReport);
 
     router.get('/reports/:name',MyController.getReportsList);
 
@@ -11,7 +17,6 @@ export const router = Router();
 
     router.get('/order/:number',MyController.getOrderList);
 
-    router.post('/',MyController.createReport);
 
     router.patch('/update/:number',MyController.updateReport);
 

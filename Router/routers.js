@@ -1,11 +1,14 @@
 import { Router } from "express";
 import { MyController } from "../Controller/controller.js";
+import multer from "multer";
+
+const upload = multer();
 
 export const router = Router();
 
-    // router.get('/',MyController.getConnection);
+    router.get('/',MyController.getConnection);
 
-    // router.get('/login',Mycontroller.getLogin);
+    router.post('/login',upload.none(),MyController.login);
 
     router.get('/report',MyController.getAll);
 

@@ -1,7 +1,20 @@
 import { MysqlModel } from "../Model/modelMysql.js";
-import { json } from "express";
+
 
 export class MyController {
+
+    // funcion para verificar la conexion
+    static async getConnection(request, response) {
+        if(request.url === '/') {
+            let dateTime = new Date();
+            let result = {
+                    status: "success",
+                    message: "Server is up and running",
+                    timestamp: dateTime     
+            }
+            response.json(result)
+        }
+    }
 
     static async getAll(request,response) {
         try {
@@ -33,6 +46,14 @@ export class MyController {
         }
     }
         
+    static async login(request,response){
+        try {
+            console.log(request.body)
+        } catch (error) {
+            response.json({error:error})
+        }
+    }
+
     static async getOrderList(request,response){
         try {
             const numberOrder = Number(request.params.number);
